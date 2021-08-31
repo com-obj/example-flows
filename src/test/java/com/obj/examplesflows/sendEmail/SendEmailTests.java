@@ -22,14 +22,9 @@ class SendEmailTests {
 	
 	@Autowired private SendEmailService emailService;	
 
-	@RegisterExtension
-	static GreenMailExtension greenMail = new GreenMailExtension(ServerSetupTest.SMTP)
-	  	.withConfiguration(GreenMailConfiguration.aConfig().withUser("john_doe", "pwd"))
-	  	.withPerMethodLifecycle(false);
-
 	@Test
 	void sendSimpleEmail() throws Exception {
-		emailService.sendEmail("john_doe@company.com", "subject", "Hello World!");
+		emailService.sendEmail("john_doe@company.com", "Subject", "Hello World!");
 		
 		boolean recieved = greenMail.waitForIncomingEmail(5000L, 1);
 		
@@ -37,11 +32,19 @@ class SendEmailTests {
 		assertEquals(1, greenMail.getReceivedMessages().length);
 		
 	    MimeMessage receivedMessage = greenMail.getReceivedMessages()[0];
+	    MimeMessageParser parsedEmail = new MimeMessageParser(receivedMessage).parse();
 	    
-	    assertEquals("Hello World!",new MimeMessageParser(receivedMessage).parse().getPlainContent());
+	    assertEquals("Hello World!",parsedEmail.getPlainContent());
+	    assertEquals("Subject",parsedEmail.getSubject());
 	    assertEquals(1, receivedMessage.getAllRecipients().length);
 	    assertEquals("john_doe@company.com", receivedMessage.getAllRecipients()[0].toString());
 		
 	}
+
+
+	@RegisterExtension
+	static GreenMailExtension greenMail = new GreenMailExtension(ServerSetupTest.SMTP)
+	  	.withConfiguration(GreenMailConfiguration.aConfig().withUser("john_doe", "pwd"))
+	  	.withPerMethodLifecycle(false);
 
 }
