@@ -6,6 +6,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 
 import com.obj.nc.Get;
+import com.obj.nc.domain.IsTypedJson;
+import com.obj.nc.utils.JsonUtils;
 
 @SpringBootApplication
 @ComponentScan(basePackageClasses = {Get.class, EventToMessageApplication.class})

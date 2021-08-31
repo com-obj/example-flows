@@ -66,12 +66,6 @@ class EventToMessageTests {
 	    assertEquals(1, receivedMessage.getAllRecipients().length);
 	    assertEquals("john_doe@company.com", receivedMessage.getAllRecipients()[0].toString());		
 	}
-	
-    @BeforeEach
-    public void startSourcePolling() {    	
-    	JsonUtils.resetObjectMapper();
-    	JsonUtils.getObjectMapper().addMixIn(IsTypedJson.class, NewCustomerRegistrationEvent.class);
-    }
 
 	public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
 	
