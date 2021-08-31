@@ -1,0 +1,21 @@
+rootProject.name = 'example-flows'
+
+println ''
+println '################################################################################################################################################################'
+
+if (new File(rootDir, './UseCompositeBuild.lock').exists()) {
+
+    println 'Using composite build for projects: '
+
+    if (new File(rootDir, '../notif-center').exists()) {
+        includeBuild '../notif-center'
+        println 'notif-center'
+    }
+
+} else {
+
+    println 'Using internal libraries (notif-center) as defined in gradle.build '
+}
+
+println '################################################################################################################################################################'
+println ''
