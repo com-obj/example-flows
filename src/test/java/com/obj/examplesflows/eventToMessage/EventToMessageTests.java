@@ -10,7 +10,6 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.mail.util.MimeMessageParser;
 import org.hamcrest.CoreMatchers;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.icegreen.greenmail.configuration.GreenMailConfiguration;
 import com.icegreen.greenmail.junit5.GreenMailExtension;
 import com.icegreen.greenmail.util.ServerSetupTest;
-import com.obj.nc.domain.IsTypedJson;
 import com.obj.nc.testUtils.SystemPropertyActiveProfileResolver;
 import com.obj.nc.utils.JsonUtils;
 
