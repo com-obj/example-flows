@@ -1,0 +1,25 @@
+definitions: 
+   steps:
+     - step: &mirror-to-github
+         name: 'Mirror push to git@github.com:com-obj/example-flows.git'
+         script:
+           - git push --mirror git@github.com:com-obj/example-flows.git
+
+clone:
+  depth: full
+
+pipelines:
+  branches:
+    master:
+      - step: *mirror-to-github
+    develop:
+      - step: *mirror-to-github
+    release/*:
+      - step: *mirror-to-github
+    hotfix/*:
+      - step: *mirror-to-github
+  tags:
+    v*:
+      - step: *mirror-to-github
+  default:
+    - step: *mirror-to-github
