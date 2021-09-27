@@ -10,11 +10,14 @@ sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
+    maven {
+        url "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+    }
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
-	implementation 'objectify:notif-center:1.1.6'
+    implementation 'sk.objectify:notiflow:1.1.12-SNAPSHOT'
 	
 	annotationProcessor 'org.projectlombok:lombok'
 
