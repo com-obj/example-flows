@@ -38,7 +38,7 @@ public class EventToMessageConverter implements InputEvent2MessageConverterExten
 		EmailEndpoint emailEndpoint = EmailEndpoint.builder().email(regEvent.getCustomerEmail()).build();
 		
 		EmailMessage msg = new EmailMessage();
-		msg.addRecievingEndpoints(emailEndpoint);
+		msg.addReceivingEndpoints(emailEndpoint);
 		msg.setBody(body);
 		
 		return Arrays.asList(msg);

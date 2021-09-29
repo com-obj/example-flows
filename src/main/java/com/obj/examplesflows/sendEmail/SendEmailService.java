@@ -22,7 +22,7 @@ public class SendEmailService {
 		EmailEndpoint emailEndpoint = EmailEndpoint.builder().email(recipient).build();
 		
 		EmailMessage msg = new EmailMessage();
-		msg.addRecievingEndpoints(emailEndpoint);
+		msg.addReceivingEndpoints(emailEndpoint);
 		msg.setBody(body);
 		
 		emailFlow.sendEmail(msg);		
