@@ -1,34 +1,28 @@
 package com.obj.examplesflows.eventToMessage;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.stereotype.Component;
-
+import com.obj.nc.converterExtensions.genericEvent.InputEvent2MessageConverterExtension;
 import com.obj.nc.domain.content.email.EmailContent;
 import com.obj.nc.domain.endpoints.EmailEndpoint;
 import com.obj.nc.domain.event.GenericEvent;
 import com.obj.nc.domain.message.EmailMessage;
 import com.obj.nc.domain.message.Message;
 import com.obj.nc.exceptions.PayloadValidationException;
-import com.obj.nc.flows.inputEventRouting.extensions.InputEvent2MessageConverterExtension;
+import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @Component
 public class EventToMessageConverter implements InputEvent2MessageConverterExtension {
-
 	@Override
 	public Optional<PayloadValidationException> canHandle(GenericEvent payload) {
-		if (payload.getPayloadAsPojo() instanceof NewCustomerRegistrationEvent) {
-			return Optional.empty();
-		}
-
-		return Optional.of(new PayloadValidationException("EventToMessageConverter only handles payload of type NewCustomerRegistrationEvent "));
+		return Optional.empty();
 	}
 
 	@Override
-	public List<Message<?>> convertEvent(GenericEvent event) {
-		NewCustomerRegistrationEvent regEvent = event.getPayloadAsPojo();
+	public List<Message<?>> convert(GenericEvent event) {
+		NewCustomerRegistrationEvent regEvent = event.getPayloadAsPojo(NewCustomerRegistrationEvent.class);
 		
 		EmailContent body = EmailContent.builder()
 				.subject("Welcome on board " +  regEvent.getCustomerName())

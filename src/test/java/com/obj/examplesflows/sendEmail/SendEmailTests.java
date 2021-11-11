@@ -26,7 +26,7 @@ class SendEmailTests {
 	void sendSimpleEmail() throws Exception {
 		emailService.sendEmail("john_doe@company.com", "Subject", "Hello World!");
 		
-		boolean recieved = greenMail.waitForIncomingEmail(5000L, 1);
+		boolean recieved = greenMail.waitForIncomingEmail(15000L, 1);
 		
 		assertEquals(true, recieved);
 		assertEquals(1, greenMail.getReceivedMessages().length);
